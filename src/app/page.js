@@ -8,8 +8,7 @@ export default function Home() {
       <p>posible routs</p>
       <ul>
         <li><Link href={'/pos'}>pos</Link></li>
-        <li>1</li>
-        <li>1</li>
+      
       </ul>
     </main>
   );
