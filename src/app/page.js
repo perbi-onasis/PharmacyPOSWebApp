@@ -1,13 +1,12 @@
-import Link from "next/link";
+import Link from "next/link";import { FaLink } from "react-icons/fa";
+
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="">Hello</h1>
-      <p>Posible route</p>
-      <ul>
-        <li><Link className="btn bt" href={'/pos'}>point of sale</Link></li>
-      </ul>
+      <Link className="btn bt" href={"/pos"}>
+        Point of sale <FaLink className="text-secondary"/>
+      </Link>
     </main>
   );
 }

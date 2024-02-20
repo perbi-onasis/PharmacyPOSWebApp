@@ -14,7 +14,7 @@ export default function page() {
         <div className="content  col-span-2">
           <Content />
         </div>
-        <div className="content bg-blue-500 rounded-lg p-5">
+        <div className="content bg-primary rounded-lg p-5">
           <MiniCart />
         </div>
       </div>
