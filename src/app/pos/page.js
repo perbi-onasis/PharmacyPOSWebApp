@@ -1,7 +1,7 @@
 import React from "react";
 import MenuBar from "../components/MenuBar";
 import Content from "../components/Content";
-import MiniCart from "../components/MiniCart";
+import MiniCart from "./MiniCart";
 
 export default function page() {
   return (
@@ -14,7 +14,7 @@ export default function page() {
         <div className="content  col-span-2">
           <Content />
         </div>
-        <div className="content bg-primary rounded-lg p-5">
+        <div className="content border-2 rounded-lg p-5">
           <MiniCart />
         </div>
       </div>
