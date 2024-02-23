@@ -1,9 +1,7 @@
 import React from "react";
 
-export default function Table({ data }) {
-  const addTocart = () => {
-    console.log("clicked");
-  };
+export default function Table({ data, func }) {
+ 
 
   return (
     <div>
@@ -13,22 +11,24 @@ export default function Table({ data }) {
           <thead>
             <tr className="bg-primary text-white">
               <th></th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Type</th>
+              <th>Product Name</th>
+              <th>Unit Price (GHS)</th>
+              <th>Qty in Stock</th>
+              <th>Supplier</th>
             </tr>
           </thead>
           <tbody>
             {data.map((item) => (
               <tr
                 key={item.id}
-                className="hover:bg-primary-content"
-                // onClick={addTocart}
+                className="hover:bg-primary-content "
+                onClick={()=>func(item)}
               >
                 <th></th>
                 <td>{item.name}</td>
                 <td>{item.price}</td>
-                <td>{item.type}</td>
+                <td>{item.qty}</td>
+                <td>{item.supp}</td>
               </tr>
             ))}
           </tbody>

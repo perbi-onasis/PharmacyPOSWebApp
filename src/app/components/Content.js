@@ -1,21 +1,21 @@
 import React from "react";
 import { GoSearch } from "react-icons/go";
 import Table from "./Table";
-import { drugs } from "../dummyData";
 
 
-export default function Content() {
+
+export default function Content({drugs, func}) {
 
 
   return (
-    <div className="bg-pink-40">
+    <div className="">
       <label className="input input-bordered flex items-center gap-2 max-w-md mb-5">
         <input type="text" className="grow" placeholder="Search" />
         <GoSearch />
       </label>
       <div className="">
      
-        <Table data={drugs} />
+        <Table data={drugs} func={func} />
       </div>
     </div>
   );
