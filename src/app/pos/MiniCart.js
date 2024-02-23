@@ -1,7 +1,10 @@
-import React from "react";
+'use client'
+import React, { useState } from "react";
 import { drugs } from "../dummyData";
+import daisyui from "daisyui";
 
 export default function MiniCart() {
+  const total = useState({ subtotal: "", items: "" });
   return (
     <div className="rounded-lg">
       <h3 className="font-bold text-2xl mb-2">Cart Items</h3>
@@ -10,7 +13,8 @@ export default function MiniCart() {
           <Cart cost={item.cost} name={item.name} price={item.price} />
         ))}
       </div>
-      <div></div>
+      {/* <div className="btn">total: {drugs.reduce((c, ef) => ef.price)}</div> */}
+      <div className=""></div>
     </div>
   );
 }
