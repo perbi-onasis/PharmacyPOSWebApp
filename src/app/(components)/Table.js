@@ -1,15 +1,13 @@
 import React from "react";
 
 export default function Table({ data, func }) {
- 
-
   return (
     <div>
       <div className="overflow-x-auto">
         <table className="table ">
           {/* head */}
           <thead>
-            <tr className="bg-primary text-white">
+            <tr className="bg-neutral text-white">
               <th></th>
               <th>Product Name</th>
               <th>Unit Price (GHS)</th>
@@ -21,8 +19,8 @@ export default function Table({ data, func }) {
             {data.map((item) => (
               <tr
                 key={item.id}
-                className="hover:bg-primary-content "
-                onClick={()=>func(item)}
+                className="hover:bg-primary "
+                onClick={() => func(item)}
               >
                 <th></th>
                 <td>{item.name}</td>

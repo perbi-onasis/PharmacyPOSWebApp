@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import MenuBar from "../components/MenuBar";
-import Content from "../components/Content";
+import MenuBar from "../(components)/MenuBar";
+import Content from "../(components)/Content";
 import MiniCart from "./MiniCart";
-import { drugs } from "../dummyData";
+import { drugs, navigations } from "../dummyData";
 
 export default function page() {
   const [cartItems, setCartItems] = useState([]);
- 
+
   const handleItemSelectItem = (item) => {
     // Remove item from source list
     // const updatedSourceItems = drugs.filter(
@@ -21,21 +21,19 @@ export default function page() {
     setCartItems([...cartItems, item]);
   };
 
-
   return (
-    <div className="grid grid-cols-12 min-h-[100vh]">
-      <div className="relative  bg-primary-content  p-4 ">
-        <MenuBar />
+    <div className="flex flex-row gap-3 min-h-[100vh] px-3">
+      <div className="relative bg-primary-content ">
+        <MenuBar navigations={navigations} />
       </div>
 
       {/* main content to the right */}
-      <div className="col-span-11 grid grid-cols-3 gap-4 p-5 ">
-        <div className="content  col-span-2">
-          <Content drugs={drugs} func={handleItemSelectItem} />
-        </div>
-        <div className="content border-2 rounded-lg p-5">
-          <MiniCart cartItems={cartItems} />
-        </div>
+      <div className="flex-1 bg-primary-content">
+        <Content drugs={drugs} func={handleItemSelectItem} />
+      </div>
+
+      <div className="bg-primary-content rounded-lg p-5 min-w-[20%]">
+        <MiniCart cartItems={cartItems} />
       </div>
     </div>
   );

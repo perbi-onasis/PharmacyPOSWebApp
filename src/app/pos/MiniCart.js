@@ -3,18 +3,14 @@ import React, { useState } from "react";
 import { MdDelete } from "react-icons/md";
 
 export default function MiniCart({ cartItems }) {
- 
-
-
-
-
   return (
     <div className="rounded-lg  flex flex-col  min-h-full">
       <h3 className="font-bold text-2xl mb-2 ">Cart Items</h3>
       {cartItems.length !== 0 && (
         <div className=" overflow-x-auto max-h-[35em] min-h-[30em]">
-          {cartItems.map((item) => (
+          {cartItems.map((item, index) => (
             <CartListItem
+              key={index}
               cost={item.cost}
               name={item.name}
               price={item.price}
@@ -48,7 +44,8 @@ export default function MiniCart({ cartItems }) {
 }
 
 function CartListItem({ name, cost, price }) {
-   const [countQty, setCountQty] = useState(1);
+  const [countQty, setCountQty] = useState(1);
+
   return (
     <div className="card mt-2 card-compact  bg-primary-content border border-transparent hover:border-accent hover:bg-opacity-20">
       <div className="card-body flex-row justify-between">
@@ -57,15 +54,20 @@ function CartListItem({ name, cost, price }) {
           <span className="block read-only text-gray-500">{price}</span>
         </div>
         <div className="flex items-center">
-          <button className="btn btn-sm">-</button>
-          {/* <input
-            type="text"
-            value={countQty}
-            
-            className="input input-sm  w-5 input- border-3"
-          /> */}
-          <div>{countQty}</div>
-          <button className="btn btn-sm">+</button>
+          <button
+            className="btn btn-sm"
+            onClick={() => setCountQty((prev) => prev - 1)}
+          >
+            -
+          </button>
+          <input type="number" value={countQty} className="input-sm  w-12" />
+
+          <button
+            className="btn btn-sm"
+            onClick={() => setCountQty((prev) => prev + 1)}
+          >
+            +
+          </button>
         </div>
         <div className="card-actions">
           <button className="btn btn-sm btn-error">

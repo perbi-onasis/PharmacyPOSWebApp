@@ -1,3 +1,7 @@
+
+import { GoHomeFill } from "react-icons/go";
+
+
 const drugs = [
   {
     id: 1,
@@ -101,4 +105,18 @@ const drugs = [
   },
 ];
 
-export { drugs };
+const navigations = [
+  {
+    name: "Sales",
+    link: "/pos",
+    icon: <GoHomeFill  />,
+  },
+  {
+    name: "Stocks",
+    link: "/stocks",
+    icon: <GoHomeFill />,
+  },
+
+];
+
+export { drugs, navigations };
