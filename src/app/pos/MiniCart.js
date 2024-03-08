@@ -8,8 +8,9 @@ export default function MiniCart({ cartItems }) {
       <h3 className="font-bold text-2xl mb-2 ">Cart Items</h3>
       {cartItems.length !== 0 && (
         <div className=" overflow-x-auto max-h-[35em] min-h-[30em]">
-          {cartItems.map((item) => (
+          {cartItems.map((item, index) => (
             <CartListItem
+              key={index}
               cost={item.cost}
               name={item.name}
               price={item.price}

@@ -25,15 +25,15 @@ export default  function MenuBar({ navigations }) {
       <div className="w-full px-2">
         {navigations.map((link) => (
           <div className="flex flex-col items-center w-full mt-3 border-t border-gray-700">
-            <a
+            <Link
               className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-primary hover:text-gray-300"
-              href="#"
+              href={link.link}
             >
               {link.icon}
               <span className="hidde**group-hover:flex ml-2 text-sm font-medium">
                 {link.name}
               </span>
-            </a>
+            </Link>
           </div>
         ))}
       </div>

@@ -116,11 +116,7 @@ const navigations = [
     link: "/stocks",
     icon: <GoHomeFill />,
   },
-  // {
-  //   name: "Sales",
-  //   link: "/pos",
-  //   icon: <GoHome />,
-  // },
+
 ];
 
 export { drugs, navigations };
