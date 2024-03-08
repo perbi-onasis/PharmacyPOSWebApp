@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import MenuBar from "../components/MenuBar";
-import Content from "../components/Content";
-import MiniCart from "./MiniCart";
-import { drugs } from "../dummyData";
+import MenuBar from "../../components/MenuBar";
+import Content from "../../components/Content";
+import MiniCart from "../../components/MiniCart";
+import { drugs } from "../../utils/dummyData";
 
 export default function DrugSelectionPage() {
   const [cartItems, setCartItems] = useState([]);
