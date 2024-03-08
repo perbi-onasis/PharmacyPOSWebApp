@@ -1,31 +1,68 @@
-"use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdDelete } from "react-icons/md";
 
 export default function MiniCart({ cartItems }) {
- 
+  const [cart, setCart] = useState([]);
 
+  useEffect(() => {
+    setCart(cartItems);
+  }, [cartItems]);
 
+  const handleQuantityChange = (index, newQty) => {
+    const updatedCart = [...cart];
+    updatedCart[index].countQty = Math.max(newQty, 0);
+    setCart(updatedCart);
+  };
 
+  const handleDeleteItem = (index) => {
+    const updatedCart = [...cart];
+    updatedCart.splice(index, 1);
+    setCart(updatedCart);
+  };
+
+  const handleItemSelect = (selectedItem) => {
+    const updatedCart = [...cart];
+    const existingItemIndex = updatedCart.findIndex(item => item.id === selectedItem.id);
+
+    if (existingItemIndex !== -1) {
+      // If item already exists, update its quantity
+      updatedCart[existingItemIndex].countQty += 1;
+    } else {
+      // If item is not in the cart, add it
+      setCart([...updatedCart, { ...selectedItem, countQty: 1 }]);
+    }
+  };
 
   return (
-    <div className="rounded-lg  flex flex-col  min-h-full">
-      <h3 className="font-bold text-2xl mb-2 ">Cart Items</h3>
-      {cartItems.length !== 0 && (
-        <div className=" overflow-x-auto max-h-[35em] min-h-[30em]">
-          {cartItems.map((item) => (
-            <CartListItem
-              cost={item.cost}
-              name={item.name}
-              price={item.price}
-            />
+    <div className="rounded-lg flex flex-col min-h-full">
+      <h3 className="font-bold text-2xl mb-2 text-center">Cart Items</h3>
+
+      {cart.length !== 0 ? (
+        <div className="overflow-x-auto max-h-[35em] min-h-[30em]">
+          {cart.map((item, index) => (
+            <div key={index} className="card mt-2 card-compact bg-primary-content border border-transparent hover:border-accent hover:bg-opacity-20">
+              <div className="card-body flex-row justify-between">
+                <div>
+                  <h3 className="font-bold">{item.name}</h3>
+                  <span className="block read-only text-gray-500">{item.price}</span>
+                </div>
+                <div className="w-14 flex items-center justify-between">
+                  <button className="text-xl" onClick={() => handleQuantityChange(index, item.countQty - 1)}>-</button>
+                  <div>{item.countQty}</div>
+                  <button className="text-xl" onClick={() => handleQuantityChange(index, item.countQty + 1)}>+</button>
+                </div>
+                <div className="card-actions">
+                  <button className="btn btn-sm btn-error" onClick={() => handleDeleteItem(index)}>
+                    <MdDelete />
+                  </button>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
-      )}
-
-      {cartItems.length == 0 && (
+      ) : (
         <div className="flex flex-1 justify-center items-center">
-          <div className="flex flex-col  items-center">
+          <div className="flex flex-col items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -43,36 +80,6 @@ export default function MiniCart({ cartItems }) {
           </div>
         </div>
       )}
-    </div>
-  );
-}
-
-function CartListItem({ name, cost, price }) {
-   const [countQty, setCountQty] = useState(1);
-  return (
-    <div className="card mt-2 card-compact  bg-primary-content border border-transparent hover:border-accent hover:bg-opacity-20">
-      <div className="card-body flex-row justify-between">
-        <div className="">
-          <h3 className="font-bold">{name}</h3>
-          <span className="block read-only text-gray-500">{price}</span>
-        </div>
-        <div className="flex items-center">
-          <button className="btn btn-sm">-</button>
-          {/* <input
-            type="text"
-            value={countQty}
-            
-            className="input input-sm  w-5 input- border-3"
-          /> */}
-          <div>{countQty}</div>
-          <button className="btn btn-sm">+</button>
-        </div>
-        <div className="card-actions">
-          <button className="btn btn-sm btn-error">
-            <MdDelete />
-          </button>
-        </div>
-      </div>
     </div>
   );
 }

@@ -1,8 +1,6 @@
 import React from "react";
 
-export default function Table({ data, func }) {
- 
-
+export default function Table({ data, handleItemSelect }) {
   return (
     <div>
       <div className="overflow-x-auto">
@@ -22,7 +20,7 @@ export default function Table({ data, func }) {
               <tr
                 key={item.id}
                 className="hover:bg-primary-content "
-                onClick={()=>func(item)}
+                onClick={() => handleItemSelect(item)}
               >
                 <th></th>
                 <td>{item.name}</td>

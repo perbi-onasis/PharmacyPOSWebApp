@@ -3,7 +3,6 @@ import React from "react";
 import { GoHomeFill } from "react-icons/go";
 
 export default function MenuBar() {
-  // icon
 
   return (
     <div className="flex flex-col  w-full ">
