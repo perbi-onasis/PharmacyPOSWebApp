@@ -5,32 +5,24 @@ export default function MiniCart({ cartItems }) {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    setCart(cartItems);
+    setCart(cartItems.map(item => ({ ...item, quantity: 1 })));
   }, [cartItems]);
 
-  const handleQuantityChange = (index, newQty) => {
-    const updatedCart = [...cart];
-    updatedCart[index].countQty = Math.max(newQty, 0);
-    setCart(updatedCart);
+  const handleQuantityChange = (index, amount) => {
+    setCart(prevCart => {
+      const updatedCart = [...prevCart];
+      const newQuantity = Math.max(updatedCart[index].quantity + amount, 1);
+      updatedCart[index] = { ...updatedCart[index], quantity: newQuantity };
+      return updatedCart;
+    });
   };
 
   const handleDeleteItem = (index) => {
-    const updatedCart = [...cart];
-    updatedCart.splice(index, 1);
-    setCart(updatedCart);
-  };
-
-  const handleItemSelect = (selectedItem) => {
-    const updatedCart = [...cart];
-    const existingItemIndex = updatedCart.findIndex(item => item.id === selectedItem.id);
-
-    if (existingItemIndex !== -1) {
-      // If item already exists, update its quantity
-      updatedCart[existingItemIndex].countQty += 1;
-    } else {
-      // If item is not in the cart, add it
-      setCart([...updatedCart, { ...selectedItem, countQty: 1 }]);
-    }
+    setCart(prevCart => {
+      const updatedCart = [...prevCart];
+      updatedCart.splice(index, 1);
+      return updatedCart;
+    });
   };
 
   return (
@@ -44,12 +36,11 @@ export default function MiniCart({ cartItems }) {
               <div className="card-body flex-row justify-between">
                 <div>
                   <h3 className="font-bold">{item.name}</h3>
-                  <span className="block read-only text-gray-500">{item.price}</span>
                 </div>
                 <div className="w-14 flex items-center justify-between">
-                  <button className="text-xl" onClick={() => handleQuantityChange(index, item.countQty - 1)}>-</button>
-                  <div>{item.countQty}</div>
-                  <button className="text-xl" onClick={() => handleQuantityChange(index, item.countQty + 1)}>+</button>
+                  <button className="text-xl hover:bg-gray-800" onClick={() => handleQuantityChange(index, -1)}>-</button>
+                  <div>{item.quantity}</div>
+                  <button className="text-xl hover:bg-gray-800" onClick={() => handleQuantityChange(index, 1)}>+</button>
                 </div>
                 <div className="card-actions">
                   <button className="btn btn-sm btn-error" onClick={() => handleDeleteItem(index)}>

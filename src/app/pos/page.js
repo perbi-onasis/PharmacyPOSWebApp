@@ -29,7 +29,7 @@ export default function DrugSelectionPage() {
         <div className="content col-span-2">
           <Content drugs={drugs} onSelectItem={handleItemSelect} />
         </div>
-        <div className="content border-2 rounded-lg p-5">
+        <div className="content border h-[50vh] rounded-lg p-5">
           <MiniCart cartItems={cartItems} />
         </div>
       </div>
