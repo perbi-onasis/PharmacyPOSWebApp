@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { MdDelete } from "react-icons/md";
+import { MdAdsClick, MdDelete } from "react-icons/md";
 
 export default function MiniCart({ cartItems }) {
   return (
-    <div className="rounded-lg  flex flex-col  min-h-full">
+    <div className="rounded-lg  flex flex-col ">
       <h3 className="font-bold text-2xl mb-2 ">Cart Items</h3>
       {cartItems.length !== 0 && (
         <div className=" overflow-x-auto max-h-[35em] min-h-[30em]">
@@ -22,20 +22,8 @@ export default function MiniCart({ cartItems }) {
       {cartItems.length == 0 && (
         <div className="flex flex-1 justify-center items-center">
           <div className="flex flex-col  items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="stroke-info shrink-0 w-6 h-6 animate-bounce"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-            <span className="font-bold text-xl">Cart is empty.</span>
+            <MdAdsClick />
+            <span className="hidden font-bold text-xl">Cart is empty.</span>
           </div>
         </div>
       )}

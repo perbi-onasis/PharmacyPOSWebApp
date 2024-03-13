@@ -5,6 +5,7 @@ import MenuBar from "../(components)/MenuBar";
 import Content from "../(components)/Content";
 import MiniCart from "./MiniCart";
 import { drugs, navigations } from "../dummyData";
+import NavBar from "../(components)/NavBar";
 
 export default function page() {
   const [cartItems, setCartItems] = useState([]);
@@ -22,18 +23,18 @@ export default function page() {
   };
 
   return (
-    <div className="flex flex-row gap-3 min-h-[100vh] px-3">
-      <div className="relative bg-primary-content ">
-        <MenuBar navigations={navigations} />
-      </div>
+    <div className="">
+      <NavBar />
+      <div className="flex flex-row gap-3 min-h-[100vh] px-3">
+        <div className="flex-1 px-24 overflow-y-scroll ">
+          <Content drugs={drugs} func={handleItemSelectItem} />
+        </div>
 
-      {/* main content to the right */}
-      <div className="flex-1 bg-primary-content">
-        <Content drugs={drugs} func={handleItemSelectItem} />
-      </div>
-
-      <div className="bg-primary-content rounded-lg p-5 min-w-[20%]">
-        <MiniCart cartItems={cartItems} />
+        <div className="min-w-[20%]">
+          <div className="fixed">
+            <MiniCart cartItems={cartItems} />
+          </div>
+        </div>
       </div>
     </div>
   );
