@@ -43,9 +43,8 @@ export default function Home() {
   // }, []);
   return (
     <main>
-        <NavBar />
+      <NavBar />
       <div className="flex min-h-screen flex-col items-center justify-center p-24">
-
         {UserData ? (
           <Link className="btn" href="/api/auth/signout?callbackUrl=/">
             logout

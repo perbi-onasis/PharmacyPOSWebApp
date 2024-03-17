@@ -4,33 +4,50 @@ import React from "react";
 export default function NavBar() {
   const navigations = [
     {
+      name: "Dashboard",
+      link: "/dashboard",
+      disabled: true,
+    },
+    {
       name: "Sales",
       link: "/pos",
+      disabled: false,
     },
     {
       name: "Stocks",
       link: "/stocks",
+      disabled: false,
+    },
+    {
+      name: "Profile",
+      link: "/profile",
+      disabled: true,
+    },
+    {
+      name: "Profile",
+      link: "/profile",
+      disabled: true,
     },
   ];
   return (
     <div>
-      <div className="navbar bg-base-100 border-b border-gray-500">
+      <div className="navbar bg-base-200 ">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a className="btn btn-ghost text-xl">PharmGenius</a>
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
             {navigations.map((link) => (
               <li>
                 <Link
-                  className=""
-                  href={link.link}
+                  className={`${link.disabled && "text-red-400"}`}
+                  href={`${link.disabled ? "/" : link.link}`}
                 >
                   {link.name}
                 </Link>
               </li>
             ))}
-           
+
             {/* <li>
               <details>
                 <summary>Parent</summary>

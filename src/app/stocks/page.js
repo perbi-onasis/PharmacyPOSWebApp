@@ -1,75 +1,78 @@
 "use client";
 
-import React from "react";
 import ProductForm from "./item/form";
-import { FaPlus } from "react-icons/fa";
+import { FaEdit, FaPlus } from "react-icons/fa";
 import NavBar from "../(components)/NavBar";
 
+import React, { useState } from "react";
+import { MdDeleteSweep } from "react-icons/md";
+import { drugs } from "../dummyData";
+
 export default function Stocks() {
+  const [productData, setProductData] = useState(drugs);
+
+  const handleEditClick = (id) => {
+    // Handle edit click
+    console.log("Edit clicked for product with ID:", id);
+  };
+
+  const handleDeleteClick = (id) => {
+    // Handle delete click
+    console.log("Delete clicked for product with ID:", id);
+    setProductData(productData.filter((item) => item.id !== id));
+  };
+
   return (
     <div>
-      <NavBar/>
-      <div className="overflow-x-auto">
-        <table className="table table-">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>company</th>
-              <th>location</th>
-              <th>Last Login</th>
-              <th>Favorite Color</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td>Littel, Schaden and Vandervort</td>
-              <td>Canada</td>
-              <td>12/16/2020</td>
-              <td>Blue</td>
-            </tr>
-        
-            <tr>
-              <th>4</th>
-              <td>Marjy Ferencz</td>
-              <td>Office Assistant I</td>
-              <td>Rowe-Schoen</td>
-              <td>Russia</td>
-              <td>3/25/2021</td>
-              <td>Crimson</td>
-            </tr>
-            <tr>
-              <th>5</th>
-              <td>Yancy Tear</td>
-              <td>Community Outreach Specialist</td>
-              <td>Wyman-Ledner</td>
-              <td>Brazil</td>
-              <td>5/22/2020</td>
-              <td>Indigo</td>
-            </tr>
-            <tr>
-              <th>6</th>
-              <td>Irma Vasilik</td>
-              <td>Editor</td>
-              <td>Wiza, Bins and Emard</td>
-              <td>Venezuela</td>
-              <td>12/8/2020</td>
-              <td>Purple</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <NavBar />
+      <ul className="px-16">
+      <h2 className="font-bold text-3xl py-6">Product List</h2>
+        {productData.map((product) => (
+          <>
+            <li
+              key={product.id}
+              className="p-3 flex justify-between items-center mt-3 text-sm text-gray-500 bg-base-200 "
+            >
+              <div className="">
+                <h4 className="w-full text-lg font-bold text-black">
+                  {product.name}
+                </h4>
+                <p className="">Cost Price: {product.costPrice}</p>
+                <p className="text-gray-500">
+                  Selling Price: {product.sellingPrice}
+                </p>
+              </div>
 
+              <div className="">
+                <p>Quantity In Stock: {product.quantity}</p>
+                <p>Expiry Date: {product.expiryDate}</p>
+              </div>
+
+              <div className="join gap-2">
+                <button
+                  className="btn btn-warning"
+                  onClick={() => handleEditClick(product.id)}
+                >
+                  <FaEdit />
+                </button>
+                <button
+                  className="btn btn-error"
+                  onClick={() => handleDeleteClick(product.id)}
+                >
+                  <MdDeleteSweep />
+                </button>
+              </div>
+            </li>
+          </>
+        ))}
+      </ul>
       {/* The button to open modal */}
       <label
         htmlFor="add_item_model"
-        className="fixed bottom-10 right-10 btn btn-circle p-2 btn-primary"
+        className="fixed bottom-10 right-10 btn p-5  shadow-2xl  btn-primary"
       >
-        <FaPlus size={25} />
+       
+        Add Stocks
       </label>
 
       {/* Put this part before </body> tag */}

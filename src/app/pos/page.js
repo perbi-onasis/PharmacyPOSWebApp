@@ -31,7 +31,7 @@ export default function page() {
         </div>
 
         <div className="min-w-[20%]">
-          <div className="fixed">
+          <div className="">
             <MiniCart cartItems={cartItems} />
           </div>
         </div>
