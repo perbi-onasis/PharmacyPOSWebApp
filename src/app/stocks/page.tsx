@@ -18,7 +18,7 @@ const StocksPage = () => {
 
       <div className="relative flex flex-col gap-10">
         <div className="">
-          <StockManager />{" "}
+          <StockManager />
         </div>
         <Link
           href={"/stocks/add"}

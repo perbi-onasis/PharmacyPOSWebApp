@@ -1,9 +1,8 @@
 export type ProductProp = {
-  _id: string
+  id?: string
   name: string;
   sellingPrice: number;
-  invoiceDate: string;
-  status: string;
+  status?: string;
   costPrice:number;
   categoryId:string;
   quantityInStock:number;
