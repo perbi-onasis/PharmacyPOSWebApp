@@ -9,47 +9,70 @@ import { ExtendedProductProp } from "@/types/cart";
 function ProductTable() {
   const apiUrl = "http://localhost:8053/products";
   const packageData = useFetchData(apiUrl);
-  // console.log(packageData);
 
+  const [selectedToCart, setSelectedToCart] = useState<ExtendedProductProp[]>(
+    [],
+  );
 
+  // add items to cart
+  const handleAddToCart = (item: ProductProp) => {
+    // check if an item with the same id exists
 
+    selectedToCart.forEach((element) => {
+      const isExistingItem = element.id === item.id;
+      console.log(isExistingItem);
+      
 
-  const [selected, setSelected] = useState<ExtendedProductProp[]>([]); // Modify any to your desired type
-  const handleSelectedItem = (item: ProductProp) => {
-//    check if an item with the same _id exists
-    const isExistingItem = selected.filter(
-      (selectedItem) => selectedItem._id === item._id,
-    );
+      if (isExistingItem) {
+        // If item already exists, update its quantity
 
-    // If item doesn't exist, add it to selected array with quantity 1
+        const updatedSelected = selectedToCart.map((selectedItem) => {
+          if (selectedItem.id === element.id) {
+            return { ...element, quantity: element.quantity + 1 };
+          }
+          console.log("items and element",element, item);
+
+          return selectedItem;
+        });
+        setSelectedToCart(updatedSelected);
+      }
+
+       
+    });
+
     const newItem = { ...item, quantity: 1 };
-    setSelected([...selected, newItem]);
-
-    console.log(isExistingItem); // Optionally log the item
+    setSelectedToCart([...selectedToCart, newItem]);
+    console.log(item.name.toUpperCase(), "Added to cart");
   };
 
-  const handleSelectedItem2 = (item: ProductProp) => {
-    // Use Array.some() method to check if an item with the same _id exists
-    const isExistingItem = selected.some(
-      (selectedItem) => selectedItem._id === item._id,
-    );
-
-    if (isExistingItem) {
-      // If item already exists, update its quantity
-      const updatedSelected = selected.map((selectedItem) => {
-        if (selectedItem._id === item._id) {
-          return { ...selectedItem, quantity: selectedItem.quantity + 1 };
-        }
-        return selectedItem;
-      });
-      setSelected(updatedSelected);
-    } else {
-      // If item doesn't exist, add it to selected array with quantity 1
-      const newItem = { ...item, quantity: 1 };
-      setSelected([...selected, newItem]);
-    }
-    // console.log(selected); // Optionally log the item
+  // remove item from cart
+  const handleRemoveItemFromCart = (index: any) => {
+    const newSelected = selectedToCart.filter((_, i) => i !== index);
+    return setSelectedToCart(newSelected);
   };
+
+  // const handleSelectedItem2 = (item: ProductProp) => {
+  //   // Use Array.some() method to check if an item with the same _id exists
+  //   const isExistingItem = selected.some(
+  //     (selectedItem) => selectedItem.id === item.id,
+  //   );
+
+  //   if (isExistingItem) {
+  //     // If item already exists, update its quantity
+  //     const updatedSelected = selected.map((selectedItem) => {
+  //       if (selectedItem.id === item.id) {
+  //         return { ...selectedItem, quantity: selectedItem.quantity + 1 };
+  //       }
+  //       return selectedItem;
+  //     });
+  //     setSelected(updatedSelected);
+  //   } else {
+  //     // If item doesn't exist, add it to selected array with quantity 1
+  //     const newItem = { ...item, quantity: 1 };
+  //     setSelected([...selected, newItem]);
+  //   }
+  //   // console.log(selected); // Optionally log the item
+  // };
 
   return (
     <div className="md:mt-6* md:gap-6* 2xl:mt-7.5* 2xl:gap-7.5* mt-4 grid grid-cols-4 gap-4">
@@ -123,7 +146,7 @@ function ProductTable() {
                         {packageItem.quantityInStock !== 0 && (
                           <button
                             disabled={packageItem.quantityInStock === 0}
-                            onClick={() => handleSelectedItem(packageItem)}
+                            onClick={() => handleAddToCart(packageItem)}
                             className={`group rounded-md border px-3 py-2  hover:bg-primary`}
                           >
                             <svg
@@ -158,7 +181,10 @@ function ProductTable() {
           </table>
         </div>
       </div>
-      <CartCard CartItems={selected} />
+      <CartCard
+        cartItems={selectedToCart}
+        handleRemoveItemFromCart={handleRemoveItemFromCart}
+      />
     </div>
   );
 }
