@@ -51,28 +51,6 @@ function ProductTable() {
     return setSelectedToCart(newSelected);
   };
 
-  // const handleSelectedItem2 = (item: ProductProp) => {
-  //   // Use Array.some() method to check if an item with the same _id exists
-  //   const isExistingItem = selected.some(
-  //     (selectedItem) => selectedItem.id === item.id,
-  //   );
-
-  //   if (isExistingItem) {
-  //     // If item already exists, update its quantity
-  //     const updatedSelected = selected.map((selectedItem) => {
-  //       if (selectedItem.id === item.id) {
-  //         return { ...selectedItem, quantity: selectedItem.quantity + 1 };
-  //       }
-  //       return selectedItem;
-  //     });
-  //     setSelected(updatedSelected);
-  //   } else {
-  //     // If item doesn't exist, add it to selected array with quantity 1
-  //     const newItem = { ...item, quantity: 1 };
-  //     setSelected([...selected, newItem]);
-  //   }
-  //   // console.log(selected); // Optionally log the item
-  // };
 
   return (
     <div className="md:mt-6* md:gap-6* 2xl:mt-7.5* 2xl:gap-7.5* mt-4 grid grid-cols-4 gap-4">
